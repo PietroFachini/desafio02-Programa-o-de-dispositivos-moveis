@@ -14,7 +14,32 @@
   </ion-header>
 
   <div id="container">
-    <strong>a</strong>
+    <ion-button expand="block" (click)="mostrar_produtos()">Listar produtos</ion-button>
+    <div *ngIf="boo_produtos == true">
+      <div *ngFor="let produto of produtos">
+        ID: {{ produto.id }}, <br>
+        Tipo: {{ produto.nome }},
+        Preço: {{ formatar_preco(produto.preco)}}.
+        <br>
+      </div>
+    </div>
+
+    <ion-button expand="block" (click)="mostrar_tarefas()">Listar tarefas</ion-button>
+    <div *ngIf="boo_tarefas == true">
+      <div *ngFor="let tarefa of tarefas">
+        nome: {{tarefa.titulo}}, <br>
+        concluida: {{tarefa.concluida}},
+        prioridade: {{tarefa.prioridade}}.
+        <br>
+      </div>
+    </div>
+
+    <ion-button expand="block" (click)="mostrar_inconcluidas()">Filtrar tarefas</ion-button>
+    <div *ngIf="boo_concluidas == true">
+      <div *ngFor="let tarefa of tarefas">
+        {{tarefas_concluidas(tarefa.concluida)}}
+      </div>
+    </div>
     <p></p>
   </div>
 </ion-content>

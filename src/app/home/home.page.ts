@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, CommonModule],
 })
 export class HomePage {
   constructor() {}
+
+  boo_produtos:boolean = false
+  boo_tarefas:boolean = false
+  boo_concluidas:boolean = false
+
   produtos: produto[] = [
     {id: 1, nome:"Água", preco:3, estoque:10},
     {id: 2, nome:"Coca-cola", preco:6, estoque:5},
@@ -24,7 +30,7 @@ export class HomePage {
     {id: 4, titulo:"Tomar banho", concluida:false, prioridade: "alta", dataCriacao: new Date ()},
     {id: 5, titulo:"Fazer almoço", concluida:true, prioridade: "media", dataCriacao: new Date ()}
   ];
-  filtrar_tarefas(concluida:boolean){
+  tarefas_concluidas(concluida:boolean){
     return this.tarefas.filter(tarefa => tarefa.concluida == concluida)
   }
 
@@ -38,7 +44,21 @@ export class HomePage {
     return(formatado)
   }
   
+  filtar_tarefas(prioridade: "baixa" | "media" | "alta"){
+    return this.tarefas.filter(tarefa => tarefa.prioridade === prioridade)
+  }
+
+  mostrar_produtos(){
+    this.boo_produtos =! this.boo_produtos
+  }
   
+  mostrar_tarefas(){
+    this.boo_tarefas =! this.boo_tarefas
+  }
+
+  mostrar_inconcluidas(){
+    this.boo_concluidas =! this.boo_concluidas
+  }
 }
 
 type produto = {
